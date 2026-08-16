@@ -26,17 +26,26 @@ body {
   height: calc(100vh - 60px);
   overflow-y: auto;
   z-index: 1020;
+  transition: width 0.3s ease;
 }
 
-.sidebar .nav-link {
+.sidebar.collapsed {
+    width: 70px;
+}
+
+.sidebar.collapsed .nav {
+    display: none;
+}
+
+/* .sidebar .nav-link {
   border-radius: 12px;
   padding: 10px 14px;
   transition: background-color 0.2s ease;
-}
+} */
 
-.sidebar .nav-link:hover {
+/* .sidebar .nav-link:hover {
   background-color: #f1f1f1;
-}
+} */
 
 /* =========================================
    Main Content
@@ -45,6 +54,11 @@ body {
   margin-left: 220px;
   margin-top: 60px;
   padding: 30px;
+  transition: margin-left 0.3s ease;
+}
+
+.main-content.sidebar-collapsed {
+    margin-left: 70px;
 }
 
 /* =========================================

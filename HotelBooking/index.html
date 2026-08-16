@@ -17,6 +17,9 @@
   <nav class="navbar navbar-light bg-white fixed-top shadow-sm">
     <div class="container-fluid px-3">
 
+      <!-- Hamburger menu icon (stays in navbar so it's always visible/clickable) -->
+      <span class="fs-4 me-3" id="sidebarToggle" role="button" aria-label="Toggle sidebar" style="cursor:pointer;">&#9776;</span>
+
       <!-- Logo placeholder -->
       <a class="navbar-brand fw-bold" href="#">
         <img src="images\logo.jfif" alt="Logo" width="32" height="32" class="d-inline-block align-text-top rounded me-2">
@@ -35,13 +38,8 @@
   </nav>
 
   <!-- Sidebar -->
-  <div class="sidebar bg-white shadow-sm">
+  <div class="sidebar bg-white shadow-sm" id="sidebar">
     <div class="p-3">
-      <!-- Hamburger menu icon -->
-      <div class="mb-4">
-        <span class="fs-4">&#9776;</span>
-      </div>
-
       <ul class="nav flex-column">
         <li class="nav-item mb-2">
           <a href="#" class="nav-link text-dark">Dashboard</a>
@@ -66,7 +64,7 @@
   </div>
 
   <!-- Main Content -->
-  <div class="main-content">
+  <div class="main-content" id="mainContent">
 
     <!-- Hero -->
     <section class="hero rounded-4 shadow-sm text-center text-white d-flex align-items-center justify-content-center mb-5"
@@ -74,12 +72,12 @@
       <div>
         <h1 class="display-4 fw-bold">Find Your Perfect Stay</h1>
         <p class="lead">Book hotels at the best prices.</p>
-        <button type="button" class="btn btn-light btn-lg rounded-pill mt-3">Explore Hotels</button>
+        <button type="button" class="btn btn-light btn-lg rounded-pill mt-3 explore-btn">Explore Hotels</button>
       </div>
     </section>
 
     <!-- Cards -->
-    <section class="mb-7">
+    <section class="mb-7" id="explore">
       <h2 class="text-center mb-4">Explore</h2>
       <div class="container-fluid">
         <div class="row g-4">
@@ -91,7 +89,7 @@
               <div class="card-body">
                 <h5 class="card-title">Tolip Hotel Alexandria</h5>
                 <p class="card-text small text-muted">5-Stars Hotel</p>
-                <button class="btn btn-outline-primary btn-sm rounded-pill">Learn More</button>
+                <button class="btn btn-outline-primary btn-sm rounded-pill learn-more-btn" data-hotel="tolip">Learn More</button>
               </div>
             </div>
           </div>
@@ -103,7 +101,7 @@
               <div class="card-body">
                 <h5 class="card-title">SUNRISE Alex Avenue Hotel</h5>
                 <p class="card-text small text-muted">5-Stars Hotel</p>
-                <button class="btn btn-outline-primary btn-sm rounded-pill">Learn More</button>
+                <button class="btn btn-outline-primary btn-sm rounded-pill learn-more-btn" data-hotel="sunrise">Learn More</button>
               </div>
             </div>
           </div>
@@ -115,7 +113,7 @@
               <div class="card-body">
                 <h5 class="card-title">Hilton Alexandria Green Plaza</h5>
                 <p class="card-text small text-muted">5-Stars Hotel</p>
-                <button class="btn btn-outline-primary btn-sm rounded-pill">Learn More</button>
+                <button class="btn btn-outline-primary btn-sm rounded-pill learn-more-btn" data-hotel="hilton-greenplaza">Learn More</button>
               </div>
             </div>
           </div>
@@ -127,7 +125,7 @@
               <div class="card-body">
                 <h5 class="card-title">Paradise Inn-Windsor Palace</h5>
                 <p class="card-text small text-muted">4-Stars Hotel</p>
-                <button class="btn btn-outline-primary btn-sm rounded-pill">Learn More</button>
+                <button class="btn btn-outline-primary btn-sm rounded-pill learn-more-btn" data-hotel="paradise-inn">Learn More</button>
               </div>
             </div>
           </div>
@@ -139,7 +137,7 @@
               <div class="card-body">
                 <h5 class="card-title">Alexander The Great Hotel</h5>
                 <p class="card-text small text-muted">3-Stars Hotel</p>
-                <button class="btn btn-outline-primary btn-sm rounded-pill">Learn More</button>
+                <button class="btn btn-outline-primary btn-sm rounded-pill learn-more-btn" data-hotel="alexander-great">Learn More</button>
               </div>
             </div>
           </div>
@@ -151,7 +149,7 @@
               <div class="card-body">
                 <h5 class="card-title">Crowne Plaza Alexandria Mirage</h5>
                 <p class="card-text small text-muted">5-Stars Hotel</p>
-                <button class="btn btn-outline-primary btn-sm rounded-pill">Learn More</button>
+                <button class="btn btn-outline-primary btn-sm rounded-pill learn-more-btn" data-hotel="crowne-plaza">Learn More</button>
               </div>
             </div>
           </div>
@@ -163,7 +161,7 @@
               <div class="card-body">
                 <h5 class="card-title">RITZ Hotel</h5>
                 <p class="card-text small text-muted">Very Good</p>
-                <button class="btn btn-outline-primary btn-sm rounded-pill">Learn More</button>
+                <button class="btn btn-outline-primary btn-sm rounded-pill learn-more-btn" data-hotel="ritz">Learn More</button>
               </div>
             </div>
           </div>
@@ -175,7 +173,7 @@
               <div class="card-body">
                 <h5 class="card-title">Hilton Alexandria Cornishe</h5>
                 <p class="card-text small text-muted">5-Stars Hotel</p>
-                <button class="btn btn-outline-primary btn-sm rounded-pill">Learn More</button>
+                <button class="btn btn-outline-primary btn-sm rounded-pill learn-more-btn" data-hotel="hilton-cornishe">Learn More</button>
               </div>
             </div>
           </div>
@@ -240,7 +238,7 @@
              Whether you're planning a relaxing vacation, a business trip, or a romantic getaway,
              we make it easy to find the perfect stay with secure booking and instant confirmation.
             </p>
-            <button type="button" class="btn btn-primary rounded-pill">Explore Hotels</button>
+            <button type="button" class="btn btn-primary rounded-pill explore-btn">Explore Hotels</button>
           </div>
 
         </div>
@@ -288,8 +286,10 @@
     </div>
   </footer>
 
-  <!-- Bootstrap 5 JS Bundle (only for basic Bootstrap behavior, no custom JS logic) -->
-                  <script src="script.js"></script>
+  <!-- Shared hotel data (used by both index and hotel-details pages) -->
+  <script src="js/hotels-data.js"></script>
+  <!-- Main interactivity script -->
+  <script src="script.js"></script>
 
 </body>
 </html>
